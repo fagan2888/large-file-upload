@@ -1,0 +1,28 @@
+<html>
+
+<script src="https://sdk.amazonaws.com/js/aws-sdk-2.22.0.min.js"></script>
+<script src="scripts/upload_file.js"></script>
+
+<input type="file" id="files" name="files"  />
+    <output id="list"></output>
+
+    <script>
+      function handleFileSelect(evt) {
+        var files = evt.target.files; // FileList object
+        console.log('files:', files);
+
+        // files is a FileList of File objects. List some properties.
+        var output = [];
+        for (var i = 0, f; f = files[i]; i++) {
+          output.push('<li><strong>', escape(f.name), '</strong> (', f.type || 'n/a', ') - ',
+                      f.size, ' bytes, last modified: ',
+                      f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a',
+                      '</li>');
+            upload_file(f);
+        }
+        document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
+      }
+
+      document.getElementById('files').addEventListener('change', handleFileSelect, false);
+    </script>
+</html>
