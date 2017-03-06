@@ -1,0 +1,5 @@
+dd if=/dev/urandom of=/tmp/2gbfile count=4m
+dd if=/dev/urandom of=/tmp/100mbfile count=200k
+
+python scripts/upload_file.py test/data/tiny.txt somesite.com/endpoint
+python scripts/upload_file.py /tmp/100mbbfile somesite.com/endpoint
