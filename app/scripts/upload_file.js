@@ -10,5 +10,12 @@ function upload_file(file)  {
     var ret = s3.upload({Bucket: "pkerp", Key: "public/tmp/test.txt", Body: file });
     console.log('ret:', ret);
 
-    ret.send();
+    ret.on('httpUploadProgress', function(progress) {
+        console.log('progress:', progress);
+    });
+
+    ret.send(function(err, data) {
+        console.log('err:', err);
+        console.log('data:', data);
+    });
 }
